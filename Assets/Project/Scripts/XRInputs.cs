@@ -76,7 +76,7 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeHMD => ! hasHMD ? default : deviceList_HMD[ 0 ];
     
-    List<InputDevice> deviceList_HMD = new List<InputDevice>();
+    [SerializeField] List<InputDevice> deviceList_HMD = new List<InputDevice>();
     
     void Fetch_HMD()
     {   
@@ -91,7 +91,11 @@ public class XRInputs : MonoBehaviour
 
     void Scan_HMD()
     {
-        if( ! hasHMD ) return;
+        if( ! hasHMD ) 
+        { 
+            Fetch_HMD();
+            return;
+        }
         
         activeHMD.TryGetFeatureValue( CommonUsages.isTracked, out hmd_tracking );
         
@@ -124,7 +128,7 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeLeftController => ! hasLeftController ? default : deviceList_LeftController[ 0 ];
     
-    List<InputDevice> deviceList_LeftController = new List<InputDevice>();
+    [SerializeField] List<InputDevice> deviceList_LeftController = new List<InputDevice>();
     
     void Fetch_LeftController()
     {   
@@ -139,7 +143,11 @@ public class XRInputs : MonoBehaviour
 
     void Scan_LeftController()
     {
-        if( ! hasLeftController ) return;
+        if( ! hasLeftController ) 
+        { 
+            Fetch_LeftController();
+            return;
+        }
         
         activeLeftController.TryGetFeatureValue( CommonUsages.isTracked, out leftController_tracking );
 
@@ -184,7 +192,7 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeRightController => ! hasRightController ? default : deviceList_RightController[ 0 ];
     
-    List<InputDevice> deviceList_RightController = new List<InputDevice>();
+    [SerializeField] List<InputDevice> deviceList_RightController = new List<InputDevice>();
     
     void Fetch_RightController()
     {   
@@ -199,8 +207,12 @@ public class XRInputs : MonoBehaviour
 
     void Scan_RightController()
     {
-        if( ! hasRightController ) return;
-        
+        if( ! hasRightController ) 
+        {
+            Fetch_RightController();
+            return;
+        }
+
         activeRightController.TryGetFeatureValue( CommonUsages.isTracked, out rightController_tracking );
 
         if( rightController_tracking )
