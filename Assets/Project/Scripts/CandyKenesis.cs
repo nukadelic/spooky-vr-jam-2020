@@ -12,21 +12,27 @@ public class CandyKenesis : MonoBehaviour
         candyHoard.Add(candyRB);
         CreateJoint(candyRB.GetComponent<Rigidbody>());
     }
-    public void UnregisterCandy(Transform candyTrans)
+    public void UnregisterCandy(Rigidbody candyRB)
     {
-        candyHoard.Remove(candyTrans);
+        candyHoard.Remove(candyRB);
 
     }
     void Start()
     {
         jd.positionDamper = 1f;
-        limit.limit = 0.38f;
+        jd.maximumForce = 10f;
+        limit.limit = 0.45f;
+
+        foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+            RegisterCandy(rb);
     }
 
     // Update is called once per frame
+    public Vector3 force;
     void FixedUpdate()
     {
-        foreach()
+        foreach (Rigidbody candy in candyHoard)
+            candy.AddForce(force);
     }
 
     private JointDrive jd = new JointDrive();
