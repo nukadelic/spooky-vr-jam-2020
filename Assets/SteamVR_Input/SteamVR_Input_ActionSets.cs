@@ -19,7 +19,7 @@ namespace Valve.VR
         
         private static SteamVR_Input_ActionSet_default p__default;
         
-        private static SteamVR_Input_ActionSet_spookyControls p_spookyControls;
+        private static SteamVR_Input_ActionSet_VRInputs p_VRInputs;
         
         public static SteamVR_Input_ActionSet_default _default
         {
@@ -29,21 +29,21 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Input_ActionSet_spookyControls spookyControls
+        public static SteamVR_Input_ActionSet_VRInputs VRInputs
         {
             get
             {
-                return SteamVR_Actions.p_spookyControls.GetCopy<SteamVR_Input_ActionSet_spookyControls>();
+                return SteamVR_Actions.p_VRInputs.GetCopy<SteamVR_Input_ActionSet_VRInputs>();
             }
         }
         
         private static void StartPreInitActionSets()
         {
             SteamVR_Actions.p__default = ((SteamVR_Input_ActionSet_default)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_default>("/actions/default")));
-            SteamVR_Actions.p_spookyControls = ((SteamVR_Input_ActionSet_spookyControls)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_spookyControls>("/actions/spookyControls")));
+            SteamVR_Actions.p_VRInputs = ((SteamVR_Input_ActionSet_VRInputs)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_VRInputs>("/actions/VRInputs")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
                     SteamVR_Actions._default,
-                    SteamVR_Actions.spookyControls};
+                    SteamVR_Actions.VRInputs};
         }
     }
 }
