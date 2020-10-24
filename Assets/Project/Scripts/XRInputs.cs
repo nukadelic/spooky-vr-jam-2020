@@ -51,6 +51,29 @@ public class XRInputs : MonoBehaviour
         Scan_RightController();
 
         SteamVR_ScanInputs();
+
+        if( isDebugging )
+        {
+            debugText.text = "";
+            
+            debugText.text += "\n" + "(L) primaryButton: "   + leftController_primaryButton.ToString()
+                + "\t\t (R) primaryButton"   + rightController_primaryButton.ToString();
+            debugText.text += "\n" + "(L) joystick: "        + leftController_joystick.ToString()
+                + "\t\t (R) joystick"        + rightController_joystick.ToString();
+            debugText.text += "\n" + "(L) joystickClick: "   + leftController_joystickClick.ToString()
+                + "\t\t (R) joystickClick"   + rightController_joystickClick.ToString();
+            debugText.text += "\n" + "(L) joystickTouch: "   + leftController_joystickTouch.ToString()
+                + "\t\t (R) joystickTouch"   + rightController_joystickTouch.ToString();
+            debugText.text += "\n" + "(L) gripIsDown: "      + leftController_gripIsDown.ToString()
+                + "\t\t (R) gripIsDown"      + rightController_gripIsDown.ToString();
+            debugText.text += "\n" + "(L) gripValue: "       + leftController_gripValue.ToString("N2")
+                + "\t\t (R) gripValue"       + rightController_gripValue.ToString("N2");
+            debugText.text += "\n" + "(L) triggerIsDown: "   + leftController_triggerIsDown.ToString()
+                + "\t\t (R) triggerIsDown"   + rightController_triggerIsDown.ToString();
+            debugText.text += "\n" + "(L) triggerValue: "    + leftController_triggerValue.ToString("N2")
+                + "\t\t (R) triggerValue"    + rightController_triggerValue.ToString("N2");
+
+        }
     }
 
     #endregion
@@ -129,7 +152,7 @@ public class XRInputs : MonoBehaviour
         //OnFetchedLeft -= SteamVR_ReadyToCapture;
         //OnFetchedRight -= SteamVR_ReadyToCapture;
 
-        //controllerMapping.Activate( leftController | rightController , 0, true );
+        controllerMapping.Activate( leftController | rightController, 0, true );
 
         //steamVR_captured = controllerMapping.IsActive();
 
@@ -148,14 +171,14 @@ public class XRInputs : MonoBehaviour
 
         if( inputJoystick != null && inputJoystick.activeBinding )
         {
-            leftController_joystick = inputJoystick.GetAxis( SteamVR_Input_Sources.LeftHand );
-            rightController_joystick = inputJoystick.GetAxis( SteamVR_Input_Sources.RightHand );
+            leftController_joystick = inputJoystick.GetAxis( leftController );
+            rightController_joystick = inputJoystick.GetAxis( rightController );
         }
         
         if( inputGrip != null && inputGrip.activeBinding )
         {
-            leftController_gripValue = inputGrip.GetAxis( SteamVR_Input_Sources.LeftHand );
-            rightController_gripValue = inputGrip.GetAxis( SteamVR_Input_Sources.RightHand );
+            leftController_gripValue = inputGrip.GetAxis( leftController );
+            rightController_gripValue = inputGrip.GetAxis( rightController );
 
             leftController_gripIsDown = leftController_gripValue > 0.5f;
             rightController_gripIsDown = rightController_gripValue > 0.5f;
@@ -163,8 +186,8 @@ public class XRInputs : MonoBehaviour
 
         if( inputTrigger != null && inputTrigger.activeBinding )
         {
-            leftController_triggerValue = inputTrigger.GetAxis( SteamVR_Input_Sources.LeftHand );
-            rightController_triggerValue = inputTrigger.GetAxis( SteamVR_Input_Sources.RightHand );
+            leftController_triggerValue = inputTrigger.GetAxis( leftController );
+            rightController_triggerValue = inputTrigger.GetAxis( rightController );
             
             leftController_triggerIsDown = leftController_triggerValue > 0.5f;
             rightController_triggerIsDown = rightController_triggerValue > 0.5f;
@@ -172,8 +195,8 @@ public class XRInputs : MonoBehaviour
 
         if( inputPrimary != null && inputPrimary.activeBinding )
         {
-            leftController_primaryButton = inputPrimary.GetState( SteamVR_Input_Sources.LeftHand );
-            rightController_primaryButton = inputPrimary.GetState( SteamVR_Input_Sources.RightHand );
+            leftController_primaryButton = inputPrimary.GetState( leftController );
+            rightController_primaryButton = inputPrimary.GetState( rightController );
         }
         
         //leftController_joystick = SteamVR_Actions.VRInputs.joystick_position[ leftController ].axis;
