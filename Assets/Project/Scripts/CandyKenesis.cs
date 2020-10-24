@@ -21,7 +21,7 @@ public class CandyKenesis : MonoBehaviour
     {
         jd.positionDamper = 1f;
         jd.maximumForce = 10f;
-        limit.limit = 0.45f;
+        limit.limit = 0.2f;
 
         foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
             RegisterCandy(rb);
@@ -31,8 +31,7 @@ public class CandyKenesis : MonoBehaviour
     public Vector3 force;
     void FixedUpdate()
     {
-        force.x = deviceBridge.leftController_joystick.x;
-        force.z = deviceBridge.leftController_joystick.y;
+
         foreach (Rigidbody candy in candyHoard)
             candy.AddForce(force * 20f); 
     }
@@ -61,5 +60,18 @@ public class CandyKenesis : MonoBehaviour
         tempJoint.enableCollision = false;
         tempJoint.enablePreprocessing = false;
         
+    }
+
+    public float Wrap180(float value)
+    {
+        while (value > 180f)
+        {
+            value -= 360;
+        }
+        while (value < -180f)
+        {
+            value += 360f;
+        }
+        return value;
     }
 }
