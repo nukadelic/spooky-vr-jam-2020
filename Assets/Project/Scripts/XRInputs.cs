@@ -33,14 +33,9 @@ public class XRInputs : MonoBehaviour
         HookStatic( this );
     }
 
-    void OnEnable( )
-    {
-        FetchHardware();
-    }
-    
     void Update()
     {
-        Scan_HMD();
+
         Scan_LeftController();
         Scan_RightController();
     }
@@ -53,7 +48,23 @@ public class XRInputs : MonoBehaviour
         Fetch_LeftController();
         Fetch_RightController();
     }
+    protected virtual void OnEnable()
+    {
+        FetchHardware();
+        Application.onBeforeRender += OnBeforeRender;
+    }
 
+    protected virtual void OnDisable()
+    {
+
+        Application.onBeforeRender -= OnBeforeRender;
+    }
+
+
+    protected virtual void OnBeforeRender()
+    {
+        Scan_HMD();
+    }
     // -------------------------------------------------------
 
     #region Common values

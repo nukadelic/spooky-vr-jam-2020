@@ -6,7 +6,7 @@ public class CandyKenesis : MonoBehaviour
 {
     public List<Rigidbody> candyHoard = new List<Rigidbody>();
     public Rigidbody candyAnchor;
-
+    public XRInputs deviceBridge;
     public void RegisterCandy(Rigidbody candyRB)
     {
         candyHoard.Add(candyRB);
@@ -31,8 +31,10 @@ public class CandyKenesis : MonoBehaviour
     public Vector3 force;
     void FixedUpdate()
     {
+        force.x = deviceBridge.leftController_joystick.x;
+        force.z = deviceBridge.leftController_joystick.y;
         foreach (Rigidbody candy in candyHoard)
-            candy.AddForce(force);
+            candy.AddForce(force * 20f); 
     }
 
     private JointDrive jd = new JointDrive();

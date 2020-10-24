@@ -9,5 +9,6 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/Checking Setup.unity
     guid: 2a6409c0625ed9b4f80316120d0a2571
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0fd33536d1b73dc408007ad48c826e5f, type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 506262cc38a238048af441a6b5f54693, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 03990d690268b394ba6df92e5006f093, type: 2}
