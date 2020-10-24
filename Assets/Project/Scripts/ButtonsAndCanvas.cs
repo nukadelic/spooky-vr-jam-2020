@@ -9,7 +9,7 @@ public class ButtonsAndCanvas : MonoBehaviour
     
     void Start()
     {
-        button.onClick.AddListener( BtnClick );
+        button?.onClick.AddListener( BtnClick );
     }
 
     void BtnClick()

@@ -2,7 +2,7 @@
   "source": "Unity",
   "applications": [
     {
-      "app_key": "application.generated.unity.spookyvrjam2020.exe",
+      "app_key": "plication.generated.unity.spookyvrjam2020.exexe",
       "launch_type": "url",
       "url": "steam://launch/",
       "action_manifest_path": "C:\\Users\\John Smith\\Documents\\GitHub\\spooky-vr-jam-2020\\Assets\\StreamingAssets\\SteamVR\\actions.json",

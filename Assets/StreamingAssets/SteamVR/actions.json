@@ -54,24 +54,28 @@
       "type": "vibration"
     },
     {
-      "name": "/actions/spookyControls/in/LeftAxis",
+      "name": "/actions/VRInputs/in/joystick_position",
       "type": "vector2",
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/spookyControls/in/RightAxis",
-      "type": "vector2",
-      "requirement": "mandatory"
-    },
-    {
-      "name": "/actions/spookyControls/in/LeftGrip",
+      "name": "/actions/VRInputs/in/trigger_pull",
       "type": "vector1",
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/spookyControls/in/RightGrip",
+      "name": "/actions/VRInputs/in/grip_pull",
       "type": "vector1",
       "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/VRInputs/in/primary_button",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/VRInputs/in/secondary_button",
+      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -80,8 +84,8 @@
       "usage": "single"
     },
     {
-      "name": "/actions/spookyControls",
-      "usage": "leftright"
+      "name": "/actions/VRInputs",
+      "usage": "single"
     }
   ],
   "default_bindings": [
@@ -151,11 +155,7 @@
       "/actions/default/in/Teleport": "Teleport",
       "/actions/default/out/Haptic": "Haptic",
       "/actions/default/in/SnapTurnLeft": "Snap Turn (Left)",
-      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)",
-      "/actions/spookyControls/in/RightAxis": "Right Axis",
-      "/actions/spookyControls/in/LeftAxis": "Left Axis",
-      "/actions/spookyControls/in/LeftGrip": "Left Grip",
-      "/actions/spookyControls/in/RightGrip": "Rigth Grip"
+      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)"
     }
   ]
 }
