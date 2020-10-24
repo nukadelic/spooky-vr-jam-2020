@@ -14,7 +14,7 @@ public class CandyKenesis : MonoBehaviour
     }
     public void UnregisterCandy(Transform candyTrans)
     {
-        candyHoard.Remove(candyTrans);
+        //candyHoard.Remove(candyTrans);
 
     }
     void Start()
@@ -26,7 +26,7 @@ public class CandyKenesis : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach()
+        //foreach()
     }
 
     private JointDrive jd = new JointDrive();
