@@ -14,38 +14,46 @@ namespace Valve.VR
     using UnityEngine;
     
     
-    public class SteamVR_Input_ActionSet_spookyControls : Valve.VR.SteamVR_ActionSet
+    public class SteamVR_Input_ActionSet_VRInputs : Valve.VR.SteamVR_ActionSet
     {
         
-        public virtual SteamVR_Action_Vector2 LeftAxis
+        public virtual SteamVR_Action_Vector2 joystick_position
         {
             get
             {
-                return SteamVR_Actions.spookyControls_LeftAxis;
+                return SteamVR_Actions.vRInputs_joystick_position;
             }
         }
         
-        public virtual SteamVR_Action_Vector2 RightAxis
+        public virtual SteamVR_Action_Single trigger_pull
         {
             get
             {
-                return SteamVR_Actions.spookyControls_RightAxis;
+                return SteamVR_Actions.vRInputs_trigger_pull;
             }
         }
         
-        public virtual SteamVR_Action_Single LeftGrip
+        public virtual SteamVR_Action_Single grip_pull
         {
             get
             {
-                return SteamVR_Actions.spookyControls_LeftGrip;
+                return SteamVR_Actions.vRInputs_grip_pull;
             }
         }
         
-        public virtual SteamVR_Action_Single RightGrip
+        public virtual SteamVR_Action_Boolean primary_button
         {
             get
             {
-                return SteamVR_Actions.spookyControls_RightGrip;
+                return SteamVR_Actions.vRInputs_primary_button;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean secondary_button
+        {
+            get
+            {
+                return SteamVR_Actions.vRInputs_secondary_button;
             }
         }
     }
