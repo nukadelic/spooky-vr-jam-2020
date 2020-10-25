@@ -11,7 +11,7 @@ public class JumpDetect : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == 8)
         {
-            if( collision.GetContact(0).point.y - myBody.transform.position.y< -0.18f)
+            if( collision.GetContact(0).point.y - myBody.transform.position.y< -0.28f)
                 touchingGround = true;
         }
             
@@ -20,7 +20,7 @@ public class JumpDetect : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == 8)
         {
-            if (collision.GetContact(0).point.y - myBody.transform.position.y < -0.18f)
+            if (collision.GetContact(0).point.y - myBody.transform.position.y < -0.28f)
                 touchingGround = true;
         }
 

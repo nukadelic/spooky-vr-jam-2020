@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerCone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef17ca57ce682964499ff291567b7ef3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef17ca57ce682964499ff291567b7ef3, type: 3}
 --- !u!4 &16235420 stripped
@@ -266,6 +270,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bc6163cf16510d345a92c3be9acd154d, type: 3}
       propertyPath: m_Name
       value: SewerMedium (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc6163cf16510d345a92c3be9acd154d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6163cf16510d345a92c3be9acd154d, type: 3}
@@ -1298,6 +1306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerMedium
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc6163cf16510d345a92c3be9acd154d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6163cf16510d345a92c3be9acd154d, type: 3}
 --- !u!4 &380985249 stripped
@@ -1440,6 +1452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerBulgeSmall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 19924d6f3975f8c4c9dd67cdea6d1ad9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19924d6f3975f8c4c9dd67cdea6d1ad9, type: 3}
 --- !u!1001 &482810803
@@ -1500,6 +1516,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
       propertyPath: m_Name
       value: SewerThin
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
@@ -2173,6 +2193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerBulgeLarge (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9999911556e22d04fa00af10640bd7be, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9999911556e22d04fa00af10640bd7be, type: 3}
 --- !u!1 &729711451
@@ -2639,6 +2663,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
       propertyPath: m_Name
       value: SewerThin (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b60de8228980a244a1f01e573a68ece, type: 3}
@@ -3489,6 +3517,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerBulgeLarge
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9999911556e22d04fa00af10640bd7be, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9999911556e22d04fa00af10640bd7be, type: 3}
 --- !u!4 &1203042967 stripped
@@ -4254,6 +4286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerBulgeSmall
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 19924d6f3975f8c4c9dd67cdea6d1ad9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19924d6f3975f8c4c9dd67cdea6d1ad9, type: 3}
 --- !u!4 &1536147606 stripped
@@ -4710,6 +4746,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ef17ca57ce682964499ff291567b7ef3, type: 3}
       propertyPath: m_Name
       value: SewerCone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef17ca57ce682964499ff291567b7ef3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef17ca57ce682964499ff291567b7ef3, type: 3}
