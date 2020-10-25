@@ -6,13 +6,17 @@ public class JumpDetect : MonoBehaviour
 {
     public bool touchingGround = false;
     public Rigidbody myBody;
+    public PunpkinController myController;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.layer == 8)
         {
-            if( collision.GetContact(0).point.y - myBody.transform.position.y< -0.28f)
+            if (collision.GetContact(0).point.y - myBody.transform.position.y < -0.28f)
+            {
                 touchingGround = true;
+                myController.Ground();
+            }
         }
             
     }
@@ -21,7 +25,11 @@ public class JumpDetect : MonoBehaviour
         if (collision.collider.gameObject.layer == 8)
         {
             if (collision.GetContact(0).point.y - myBody.transform.position.y < -0.28f)
+            {
                 touchingGround = true;
+                //myController.Ground();
+
+            }
         }
 
     }
