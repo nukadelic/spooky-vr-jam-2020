@@ -19,9 +19,9 @@ public class CandyKenesis : MonoBehaviour
     }
     void Start()
     {
-        jd.positionDamper = 1f;
+        jd.positionDamper = 3f;
         jd.maximumForce = 10f;
-        limit.limit = 0.2f;
+        limit.limit = 0.15f;
 
         foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
             RegisterCandy(rb);
