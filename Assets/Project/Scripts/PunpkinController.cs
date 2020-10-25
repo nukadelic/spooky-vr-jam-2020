@@ -52,7 +52,7 @@ public class PunpkinController : MonoBehaviour
             groundDetection.touchingGround = false;
             force = Vector3.zero;
             var velocity = myCandyHoard.candyAnchor.velocity;
-            velocity.y = 5f;
+            velocity.y = 6f;
             velocity = math.clamp(velocity, -100f, 10f);
             myCandyHoard.candyAnchor.velocity = velocity;
             foreach (Rigidbody candy in myCandyHoard.candyHoard)

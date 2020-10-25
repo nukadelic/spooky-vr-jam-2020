@@ -21,7 +21,7 @@ public class CandyKenesis : MonoBehaviour
     {
         jd.positionDamper = 3f;
         jd.maximumForce = 10f;
-        limit.limit = 0.15f;
+        limit.limit = 0.28f;
 
         foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
             RegisterCandy(rb);
