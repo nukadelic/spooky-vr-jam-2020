@@ -33,8 +33,13 @@ public class DisableXR : MonoBehaviour
     private void OnDestroy( )
     {
         if( ! Application.isPlaying || Recover.state < 1 ) return;
+        
+#if UNITY_EDITOR
+        if( EditorApplication.isCompiling ) return;
+        try { UnityEngine.XR.Management.XRGeneralSettings.Instance.InitManagerOnStart = Recover.init_xr_onstart; }
+        catch( System.Exception ex ) { }
+#endif
 
-        UnityEngine.XR.Management.XRGeneralSettings.Instance.InitManagerOnStart = Recover.init_xr_onstart;
     }
 
     struct RecoverDataState 
@@ -68,8 +73,9 @@ public class DisableXR : MonoBehaviour
 
             Recover.init_xr_onstart = true;
             
+#if UNITY_EDITOR
             UnityEngine.XR.Management.XRGeneralSettings.Instance.InitManagerOnStart = false;
-
+#endif
             var complete = UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.isInitializationComplete;
 
             if ( complete )
