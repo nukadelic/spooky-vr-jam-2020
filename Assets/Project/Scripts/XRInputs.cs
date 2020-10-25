@@ -286,6 +286,9 @@ public class XRInputs : MonoBehaviour
     public bool         leftController_triggerIsDown;
     public float        leftController_triggerValue;
     
+    public TriggerEmitter leftController_grip;
+    public TriggerEmitter leftController_trigger;
+
     public event System.Action OnFetchedLeft;
     
     public bool hasLeftController => ! ( deviceList_LeftController == null || deviceList_LeftController.Count < 1 );
@@ -296,6 +299,9 @@ public class XRInputs : MonoBehaviour
     
     void Fetch_LeftController()
     {   
+        leftController_grip = new TriggerEmitter { value = 0 };
+        leftController_trigger = new TriggerEmitter { value = 0 };
+
         if( ! hasLeftController )
 
             InputDevices.GetDevicesWithCharacteristics( DeviceType.Left, deviceList_LeftController );
@@ -335,7 +341,11 @@ public class XRInputs : MonoBehaviour
             activeLeftController.TryGetFeatureValue( CommonUsages.trigger,              out leftController_triggerValue);
             
             activeLeftController.TryGetFeatureValue( CommonUsages.menuButton,           out menu_buttonDown);
+            
         }
+
+        leftController_grip.Update( leftController_gripValue );
+        leftController_trigger.Update( leftController_triggerValue );
     }
 
     #endregion
@@ -355,6 +365,9 @@ public class XRInputs : MonoBehaviour
     public float        rightController_gripValue;
     public bool         rightController_triggerIsDown;
     public float        rightController_triggerValue;
+    
+    public TriggerEmitter rightController_grip;
+    public TriggerEmitter rightController_trigger;
 
     public event System.Action OnFetchedRight;
     
@@ -366,6 +379,9 @@ public class XRInputs : MonoBehaviour
     
     void Fetch_RightController()
     {   
+        rightController_grip = new TriggerEmitter { value = 0 };
+        rightController_trigger = new TriggerEmitter { value = 0 };
+
         if( ! hasRightController )
 
             InputDevices.GetDevicesWithCharacteristics( DeviceType.Right, deviceList_RightController );
@@ -405,10 +421,32 @@ public class XRInputs : MonoBehaviour
             activeRightController.TryGetFeatureValue( CommonUsages.trigger,              out rightController_triggerValue);
             
             activeRightController.TryGetFeatureValue( CommonUsages.menuButton,           out menu_buttonDown);
-
         }
+
+        rightController_grip.Update( rightController_gripValue );
+        rightController_trigger.Update( rightController_triggerValue );
     }
 
 
     #endregion
+
+    public struct TriggerEmitter 
+    {
+        public static float Min = 0.1f;
+        public static float Max = 0.9f;
+
+        public float value;
+
+        public bool IsPressed => value > Max;
+        public bool IsReleased => value < Min;
+
+        public event System.Action OnRelease;
+        public event System.Action OnPressed;
+
+        public void Update( float newValue )
+        {
+            if( value > Min && newValue < Min ) OnRelease?.Invoke();
+            if( value < Max && newValue > Max ) OnPressed?.Invoke();
+        }
+    }
 }
