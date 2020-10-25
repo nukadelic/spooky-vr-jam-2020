@@ -42,6 +42,13 @@ public class XRInputs : MonoBehaviour
         Hook_Static( this );
 
         ForceRefresh();
+
+        Application.onBeforeRender += Update;
+    }
+
+    private void OnDisable( )
+    {
+        Application.onBeforeRender -= Update;
     }
 
     void Update()
