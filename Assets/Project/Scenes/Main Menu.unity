@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugText: {fileID: 1054160895}
   controllerMapping:
-    actionSetPath: /actions/VRInputs
+    actionSetPath: 
   inputJoystick:
     actionPath: /actions/VRInputs/in/joystick_position
     needsReinit: 0
