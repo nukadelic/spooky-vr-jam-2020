@@ -516,9 +516,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.7564405
+  m_Height: 1.7665012
   m_Direction: 1
-  m_Center: {x: 0, y: 0.121789046, z: 0}
+  m_Center: {x: 0, y: 0.11675918, z: 0}
 --- !u!1 &102136070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9999911556e22d04fa00af10640bd7be, type: 3}
