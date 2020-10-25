@@ -44,10 +44,10 @@ public class HandAnimation : MonoBehaviour
             offset_angle_z
         );
 
-        var grid_value = isLeftHand ? 
-            XRInputs.instance.leftController_gripIsDown : 
-            XRInputs.instance.rightController_gripIsDown;
+        //var grid_value = isLeftHand ? 
+        //    XRInputs.instance.leftController_gripIsDown : 
+        //    XRInputs.instance.rightController_gripIsDown;
 
-        animator.SetBool( "isGrabbing", grid_value );
+        //animator.SetBool( "isGrabbing", grid_value );
     }
 }
