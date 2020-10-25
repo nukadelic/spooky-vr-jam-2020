@@ -768,8 +768,6 @@ namespace Valve.VR
                 if (!renderModels.GetComponentStateForDevicePath(renderModelName, componentName, SteamVR_Input_Source.GetHandle(inputSource), ref controllerModeState, ref componentState))
                     continue;
 
-                Debug.Log( renderModelName + " :: " + componentName );
-
                 child.localPosition = componentState.mTrackingToComponentRenderModel.GetPosition();
                 child.localRotation = componentState.mTrackingToComponentRenderModel.GetRotation();
 
