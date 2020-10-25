@@ -29,7 +29,9 @@ public class PunpkinController : MonoBehaviour
         Application.onBeforeRender -= OnBeforeRender;
     }
 
-
+    public bool canDoubleJump = false;
+    public bool jumped = false;
+    public bool doubleJumped = false;
     public void Update()
     {
         if (usingViewPoint)
@@ -47,8 +49,11 @@ public class PunpkinController : MonoBehaviour
         force.z = deviceBridge.leftController_joystick.y;
 
         force = Quaternion.Euler(0f, currentRotation, 0f) * force;
+        
         if (groundDetection.touchingGround && deviceBridge.rightController_triggerIsDown)
         {
+            jumped = true;
+            canDoubleJump = false;
             groundDetection.touchingGround = false;
             force = Vector3.zero;
             var velocity = myCandyHoard.candyAnchor.velocity;
@@ -57,9 +62,36 @@ public class PunpkinController : MonoBehaviour
             myCandyHoard.candyAnchor.velocity = velocity;
             foreach (Rigidbody candy in myCandyHoard.candyHoard)
                 candy.velocity = velocity;
+
         }
+        else if (!groundDetection.touchingGround && canDoubleJump && !doubleJumped && deviceBridge.rightController_triggerIsDown)
+        {
+            canDoubleJump = false;
+            doubleJumped = true;
+            groundDetection.touchingGround = false;
+            // we should put a direction modifier here based on right controller rotation 
+            force = Vector3.zero;
+            var velocity = myCandyHoard.candyAnchor.velocity;
+            velocity.y = 6f;
+            velocity = math.clamp(velocity, -100f, 10f);
+            myCandyHoard.candyAnchor.velocity = velocity;
+            foreach (Rigidbody candy in myCandyHoard.candyHoard)
+                candy.velocity = velocity;
+
+        }
+        if (deviceBridge.rightController_triggerValue < 0.5f && jumped && !doubleJumped)
+            canDoubleJump = true;
+
         myCandyHoard.force = force;
 
+    }
+    // called by JumpDetect to reset the jumping/double jumping bools
+
+    public void Ground()
+    {
+        canDoubleJump = false;
+        jumped = false;
+        doubleJumped = false;
     }
     public bool usingViewPoint = false;
     protected virtual void OnBeforeRender()
@@ -78,4 +110,12 @@ public class PunpkinController : MonoBehaviour
 
     }
 
+
+    public Transform[] ghostArms;
+    public void GhostHandanimator()
+    {
+        // the ghost has two left arms and cannot be rigged as is (not without some quaternion math that isn't worth it)
+
+
+    }
 }
