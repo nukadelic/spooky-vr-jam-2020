@@ -12,20 +12,20 @@ using Valve.VR;
 
 namespace API.Input
 {
-	public sealed class XRInput : MonoBehaviour
+	public sealed class OpenVRInputs : MonoBehaviour
     {
-        public static XRInput singleton { get; private set; }
+        public static OpenVRInputs singleton { get; private set; }
 
         public List<InputDevice> devices { get; private set; } = new List<InputDevice>();
         public List<InputDevice> controllers { get; private set; } = new List<InputDevice>();
         public InputDevice handLeft { get; private set; }
         public InputDevice handRight { get; private set; }
 
-        #if VRSTUDIOS_XRINPUT_OPENVR
+        //#if VRSTUDIOS_XRINPUT_OPENVR
         private const uint controllerStateLength = OpenVR.k_unMaxTrackedDeviceCount;
-        #else
-        private const int controllerStateLength = 4;
-        #endif
+        //#else
+        //private const int controllerStateLength = 4;
+        //#endif
         private XRControllerState[] state_controllers = new XRControllerState[controllerStateLength];
         private uint state_controllerCount;
         private XRControllerState state_controllerLeft, state_controllerRight;
