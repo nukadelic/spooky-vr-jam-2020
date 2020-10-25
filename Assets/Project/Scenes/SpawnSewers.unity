@@ -421,6 +421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd3b15a56ef08d4290809b4cf8ad3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformsLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  sewerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   randomSeed: 2345
   sewerMaterial: {fileID: 2100000, guid: 97e4d9526000aa24f8268ad21657106a, type: 2}
   sewerScale: 1
@@ -436,12 +442,6 @@ MonoBehaviour:
   platformScaleMin: 1
   platformScaleMax: 2
   current: {fileID: 0}
-  platformsLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  sewerLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
 --- !u!1 &1658816559
 GameObject:
   m_ObjectHideFlags: 0
