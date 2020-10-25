@@ -9,12 +9,11 @@ public class SewerPart : MonoBehaviour
     {
         
     }
-
-    public LayerMask compareTo;
+    
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log( LayerMask.GetMask( compareTo.ToString() ) + " " + ( gameObject.layer ) );
+
     }
 }

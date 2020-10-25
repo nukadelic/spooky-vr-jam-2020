@@ -7,6 +7,12 @@ public class SewerClimb : MonoBehaviour
     // shared value across all sewers as the height values used in blender when designed 
     public static float SewerHeight = 20f;
 
+    private void OnValidate( )
+    {
+        platformsLayerMask = 1 << BitwiseUtil.GetBiggestBit( platformsLayerMask );
+        sewerLayerMask = 1 << BitwiseUtil.GetBiggestBit( sewerLayerMask );
+    }
+
     [Header("Generator Params")]
     public LayerMask platformsLayerMask;
     public LayerMask sewerLayerMask;
@@ -45,7 +51,7 @@ public class SewerClimb : MonoBehaviour
 
         var go = Instantiate( prefab );
         
-        go.layer = sewerLayerMask;
+        go.layer = BitwiseUtil.GetBiggestBit( sewerLayerMask );
 
         go.transform.parent = transform;
         go.transform.position = Vector3.up * sewerScale * SewerHeight * offset;
@@ -103,7 +109,7 @@ public class SewerClimb : MonoBehaviour
         var go = Instantiate( item );
         go.transform.parent = parent;
         go.transform.localPosition = Vector3.up * y;
-        go.layer = platformsLayerMask;
+        go.layer = BitwiseUtil.GetBiggestBit( platformsLayerMask ); // << 1
 
         go.transform.localScale = Vector3.one * scale;
         
@@ -121,7 +127,7 @@ public class SewerClimb : MonoBehaviour
         //var angle = Vector3.Angle( hitinfo.normal, Vector3.forward );
 
         go.transform.rotation = rotQ;
-        go.transform.position = hit.point + hit.normal * scale;
+        go.transform.position = hit.point + hit.normal * scale * 0.5f;
         
         //Physics.Raycast(  )
 
