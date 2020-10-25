@@ -2463,6 +2463,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 977371595146195044, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: controllerMapping.actionSetPath
+      value: /actions/VRInputs
+      objectReference: {fileID: 0}
     - target: {fileID: 977371595146195045, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
       propertyPath: bodyTransform
       value: 
