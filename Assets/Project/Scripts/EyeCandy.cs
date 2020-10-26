@@ -27,7 +27,6 @@ public class EyeCandy : MonoBehaviour
     }
     public void PlayConsumedAnimation()
     {
-
-
+        
     }
 }
