@@ -16,5 +16,7 @@ public class GlobalCoroutine : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad( gameObject );
+
+        GetComponent<AudioSource>().Play();
     }
 }
