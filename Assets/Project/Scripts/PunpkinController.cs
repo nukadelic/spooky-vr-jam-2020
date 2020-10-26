@@ -13,7 +13,7 @@ public class PunpkinController : MonoBehaviour
     public Vector3 cameraOffset = new Vector3(0f, 2f, -4f);
     private float currentRotation;
     public JumpDetect groundDetection;
-
+    public Grappler grappler;
     private Vector3 force;
 
 
@@ -38,18 +38,24 @@ public class PunpkinController : MonoBehaviour
         {
             var toPump = bodyTransform.position - viewPoint.position;
             toPump.y = 0f;
-            var dirToPump =  Quaternion.LookRotation(toPump, Vector3.up).eulerAngles;
+            var dirToPump = Quaternion.LookRotation(toPump, Vector3.up).eulerAngles;
             currentRotation = dirToPump.y;
 
-        }else if(Mathf.Abs(deviceBridge.rightController_joystick.x) > 0.2f)
+        }
+        else if (Mathf.Abs(deviceBridge.rightController_joystick.x) > 0.2f)
             currentRotation += deviceBridge.rightController_joystick.x * 3f;
 
         force = Vector3.zero;
+
         force.x = deviceBridge.leftController_joystick.x;
         force.z = deviceBridge.leftController_joystick.y;
 
+        if (grappler.isGrappling)
+        {
+            force *= 0.5f;
+        }
         force = Quaternion.Euler(0f, currentRotation, 0f) * force;
-        
+
         if (groundDetection.touchingGround && deviceBridge.rightController_triggerIsDown)
         {
             jumped = true;

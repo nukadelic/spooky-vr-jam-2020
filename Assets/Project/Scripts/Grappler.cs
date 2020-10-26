@@ -8,27 +8,77 @@ public class Grappler : MonoBehaviour
     public ConfigurableJoint grappleJoint;
     public Transform aimIndicator;
     public Transform aimerTransform;
-
+    public XRInputs deviceBridge;
+    public LineRenderer lr;
+    public Transform anchor;
+    private SoftJointLimit limit = new SoftJointLimit();
+    public void Start()
+    {
+        limit.limit = 10f;
+    }
     void FixedUpdate()
     {
-        // Bit shift the index of the layer (8) to get a bit mask
-        int layerMask = 1 << 8;
-
-        // This would cast rays only against colliders in layer 8.
-        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-        //layerMask = ~layerMask;
-
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(grappleBody.position, aimerTransform.forward, out hit, 20f, layerMask))
+        RunGrapple();
+    }
+    public void Update()
+    {
+        if (isGrappling)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
+            lr.SetPosition(0, grappleBody.position);
+            lr.SetPosition(1, anchor.position);
         }
     }
+    public bool isGrappling = false;
+    public void RunGrapple()
+    {
+        if (isGrappling && !deviceBridge.rightController_gripIsDown)
+        {
+            DeGrapple();
+        }
+        else if (!isGrappling && deviceBridge.rightController_gripIsDown)
+        {
+            GrappleCollisionCheck();
+        }else if (isGrappling)
+        {
+           // GrappleCollisionCheck();
+        }
+
+    }
+
+    public void GrappleCollisionCheck()
+    {
+        int layerMask = 1 << 8;
+        RaycastHit hit;
+        if (Physics.Raycast(grappleBody.position, aimerTransform.forward, out hit, 20f, layerMask))
+        {
+            Grapple(hit);
+            isGrappling = true;
+            //Debug.DrawRay(grappleBody.position, aimerTransform.forward * hit.distance, Color.red);
+        }
+    }
+
+    public void ReGrapple()
+    {
+
+    }
+    public void DeGrapple()
+    {
+        anchor.gameObject.SetActive(false);
+        isGrappling = false;
+
+    }
+    public void TryGrapple()
+    {
+
+
+    }
+    public void Grapple(RaycastHit hit)
+    {
+        anchor.position = hit.point;
+        anchor.gameObject.SetActive(true);
+
+        limit.limit = Vector3.Distance(hit.point, grappleBody.position);
+        grappleJoint.linearLimit = limit;
+    }
+
 }
