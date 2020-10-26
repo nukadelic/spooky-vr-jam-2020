@@ -58,19 +58,10 @@ public class Grappler : MonoBehaviour
         }
     }
 
-    public void ReGrapple()
-    {
-
-    }
     public void DeGrapple()
     {
         anchor.gameObject.SetActive(false);
         isGrappling = false;
-
-    }
-    public void TryGrapple()
-    {
-
 
     }
     public void Grapple(RaycastHit hit)
