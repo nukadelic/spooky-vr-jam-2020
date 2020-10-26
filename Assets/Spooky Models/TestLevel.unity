@@ -29790,6 +29790,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2665239345194533251, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665239345194533251, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3167118867008549240, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.5147298
