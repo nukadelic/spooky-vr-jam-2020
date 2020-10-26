@@ -48,32 +48,32 @@ public class XRDebug : MonoBehaviour
             return;
         }
 
-        textFloor.text += "[L] primaryButton" + XRInputs.instance.leftController_primaryButton + "\t";
-        textFloor.text += "[R] primaryButton" +  XRInputs.instance.rightController_primaryButton + "\n";
+        textFloor.text += "[L] primaryButton: " + XRInputs.instance.leftController_primaryButton + "\t";
+        textFloor.text += "[R] primaryButton: " +  XRInputs.instance.rightController_primaryButton + "\n";
         
-        textFloor.text += "[L] joystick" + XRInputs.instance.leftController_joystick + "\t";
-        textFloor.text += "[R] joystick" +  XRInputs.instance.rightController_joystick + "\n";
+        textFloor.text += "[L] joystick: " + XRInputs.instance.leftController_joystick + "\t";
+        textFloor.text += "[R] joystick: " +  XRInputs.instance.rightController_joystick + "\n";
         
-        //textFloor.text += "[L] joystickClick" + XRInputs.instance.leftController_joystickClick + "\t";
-        //textFloor.text += "[R] joystickClick" +  XRInputs.instance.rightController_joystickClick + "\n";
+        //textFloor.text += "[L] joystickClick: " + XRInputs.instance.leftController_joystickClick + "\t";
+        //textFloor.text += "[R] joystickClick: " +  XRInputs.instance.rightController_joystickClick + "\n";
         
-        //textFloor.text += "[L] joystickTouch" + XRInputs.instance.leftController_joystickTouch + "\t";
-        //textFloor.text += "[R] joystickTouch" +  XRInputs.instance.rightController_joystickTouch + "\n";
+        //textFloor.text += "[L] joystickTouch: " + XRInputs.instance.leftController_joystickTouch + "\t";
+        //textFloor.text += "[R] joystickTouch: " +  XRInputs.instance.rightController_joystickTouch + "\n";
         
-        textFloor.text += "[L] gripIsDown" + XRInputs.instance.leftController_gripIsDown + "\t";
-        textFloor.text += "[R] gripIsDown" +  XRInputs.instance.rightController_gripIsDown + "\n";
+        textFloor.text += "[L] gripIsDown: " + XRInputs.instance.leftController_gripIsDown + "\t";
+        textFloor.text += "[R] gripIsDown: " +  XRInputs.instance.rightController_gripIsDown + "\n";
 
-        textFloor.text += "[L] gripIsDown" + XRInputs.instance.leftController_gripIsDown + "\t";
-        textFloor.text += "[R] gripIsDown" +  XRInputs.instance.rightController_gripIsDown + "\n";
+        textFloor.text += "[L] gripIsDown: " + XRInputs.instance.leftController_gripIsDown + "\t";
+        textFloor.text += "[R] gripIsDown: " +  XRInputs.instance.rightController_gripIsDown + "\n";
         
-        textFloor.text += "[L] gripValue" + XRInputs.instance.leftController_gripValue + "\t";
-        textFloor.text += "[R] gripValue" +  XRInputs.instance.rightController_gripValue + "\n";
+        textFloor.text += "[L] gripValue: " + XRInputs.instance.leftController_gripValue.ToString("N3") + "\t";
+        textFloor.text += "[R] gripValue: " +  XRInputs.instance.rightController_gripValue.ToString("N3") + "\n";
         
-        textFloor.text += "[L] triggerIsDown" + XRInputs.instance.leftController_triggerIsDown + "\t";
-        textFloor.text += "[R] triggerIsDown" +  XRInputs.instance.rightController_triggerIsDown + "\n";
+        textFloor.text += "[L] triggerIsDown: " + XRInputs.instance.leftController_triggerIsDown + "\t";
+        textFloor.text += "[R] triggerIsDown: " +  XRInputs.instance.rightController_triggerIsDown + "\n";
 
-        textFloor.text += "[L] triggerValue" + XRInputs.instance.leftController_triggerValue + "\t";
-        textFloor.text += "[R] triggerValue" +  XRInputs.instance.rightController_triggerValue + "\n";
+        textFloor.text += "[L] triggerValue: " + XRInputs.instance.leftController_triggerValue.ToString("N3") + "\t";
+        textFloor.text += "[R] triggerValue: " +  XRInputs.instance.rightController_triggerValue.ToString("N3") + "\n";
     }
 
     #endregion

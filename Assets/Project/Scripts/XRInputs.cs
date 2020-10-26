@@ -9,11 +9,11 @@ using System.Collections;
 public class XRInputs : MonoBehaviour
 {
     // -------------------------------------------------------
-
-    public static XRInputs instance;
     
     #region Static Hook
 
+    public static XRInputs instance;
+    
     static void Hook_Static( XRInputs _instance )
     {
         if( instance != null ) 
@@ -31,6 +31,7 @@ public class XRInputs : MonoBehaviour
 
     #region MonoBehaviour methods
         
+
     void OnEnable( )
     {
         Hook_Static( this );
@@ -56,52 +57,36 @@ public class XRInputs : MonoBehaviour
 
     void UpdateUnifiedInputs()
     {
-        
-        // read Left XR
+        bool steamVR_isValid = VRInputs.instance && VRInputs.instance.steamVR_captured;
 
-        leftController_tracking = xr_leftController_tracking;
-        
-        //leftController_joystickClick = xr_leftController_joystickClick; // Obsolete
-        //leftController_joystickTouch = xr_leftController_joystickTouch; // Obsolete
+        #region Left
 
-        leftController_primaryButton = xr_leftController_primaryButton;
-        leftController_secondaryButton = xr_leftController_secondaryButton;
-        
-        leftController_position = xr_leftController_position;
-        leftController_rotation = xr_leftController_rotation;
-        
-        leftController_joystick = xr_leftController_joystick;
-        
-        leftController_triggerIsDown = xr_leftController_triggerIsDown;
-        leftController_triggerValue = xr_leftController_triggerValue;
-
-        leftController_gripValue = xr_leftController_gripValue;
-        leftController_gripIsDown = xr_leftController_gripIsDown;
-        
-        // read Right XR
-
-        rightController_tracking = xr_rightController_tracking;
-        
-        //rightController_joystickClick = xr_rightController_joystickClick; // Obsolete
-        //rightController_joystickTouch = xr_rightController_joystickTouch; // Obsolete
-
-        rightController_primaryButton = xr_rightController_primaryButton;
-        rightController_secondaryButton = xr_rightController_secondaryButton;
-        
-        rightController_position = xr_rightController_position;
-        rightController_rotation = xr_rightController_rotation;
-        
-        rightController_joystick = xr_rightController_joystick;
-        
-        rightController_triggerIsDown = xr_rightController_triggerIsDown;
-        rightController_triggerValue = xr_rightController_triggerValue;
-
-        rightController_gripValue = xr_rightController_gripValue;
-        rightController_gripIsDown = xr_rightController_gripIsDown;
-        
-        if( VRInputs.instance && VRInputs.instance.steamVR_captured )
+        if( xr_leftController_readInput )
         {
-            // read Left SteamVR
+            // read [ Left ] XR
+            
+            leftController_tracking = xr_leftController_tracking;
+        
+            //leftController_joystickClick = xr_leftController_joystickClick; // Obsolete
+            //leftController_joystickTouch = xr_leftController_joystickTouch; // Obsolete
+
+            leftController_primaryButton = xr_leftController_primaryButton;
+            leftController_secondaryButton = xr_leftController_secondaryButton;
+        
+            leftController_position = xr_leftController_position;
+            leftController_rotation = xr_leftController_rotation;
+        
+            leftController_joystick = xr_leftController_joystick;
+        
+            leftController_triggerIsDown = xr_leftController_triggerIsDown;
+            leftController_triggerValue = xr_leftController_triggerValue;
+
+            leftController_gripValue = xr_leftController_gripValue;
+            leftController_gripIsDown = xr_leftController_gripIsDown;
+        }
+        else if( steamVR_isValid )
+        {
+            // read [ Left ] SteamVR
 
             leftController_tracking = true;
 
@@ -115,8 +100,38 @@ public class XRInputs : MonoBehaviour
             
             leftController_primaryButton = VRInputs.instance.leftPrimaryButtonDown;
             leftController_secondaryButton = VRInputs.instance.leftSecondaryButtonDown;
-            
-            // read Right SteamVR
+        }
+
+        #endregion
+
+        #region Right
+
+        if( xr_rightController_readInput )
+        {
+            // read [ Right ] XR
+
+            rightController_tracking = xr_rightController_tracking;
+        
+            //rightController_joystickClick = xr_rightController_joystickClick; // Obsolete
+            //rightController_joystickTouch = xr_rightController_joystickTouch; // Obsolete
+
+            rightController_primaryButton = xr_rightController_primaryButton;
+            rightController_secondaryButton = xr_rightController_secondaryButton;
+        
+            rightController_position = xr_rightController_position;
+            rightController_rotation = xr_rightController_rotation;
+        
+            rightController_joystick = xr_rightController_joystick;
+        
+            rightController_triggerIsDown = xr_rightController_triggerIsDown;
+            rightController_triggerValue = xr_rightController_triggerValue;
+
+            rightController_gripValue = xr_rightController_gripValue;
+            rightController_gripIsDown = xr_rightController_gripIsDown;
+        }
+        else if( steamVR_isValid )
+        {
+            // read [ Right ] SteamVR
             
             rightController_tracking = true;
 
@@ -131,17 +146,31 @@ public class XRInputs : MonoBehaviour
             rightController_primaryButton = VRInputs.instance.rightPrimaryButtonDown;
             rightController_secondaryButton = VRInputs.instance.rightSecondaryButtonDown;
         }
+
+        #endregion
     }
 
     #endregion
-    
+
+    #region Config-settings and public methods 
+
+    [Header("Configuration")] 
+    [Range(0.1f,5f)] public float FetchRetryCooldown = 1f;
+
     public void ForceRefresh()
     {
-        Fetch_HMD();
-        Fetch_LeftController();
-        Fetch_RightController();
+        if( ! fetching_hmd ) 
+            StartCoroutine( Fetch_HMD() );
+        
+        if( ! fetching_leftController ) 
+            StartCoroutine( Fetch_LeftController() );
+
+        if( ! fetching_rightController )
+            StartCoroutine( Fetch_RightController() );
     }
-    
+
+    #endregion
+
     #region Common values
 
     [Header("Common Vars")]
@@ -164,24 +193,34 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeHMD => ! hasHMD ? default : deviceList_HMD[ 0 ];
     
-    [SerializeField] List<InputDevice> deviceList_HMD = new List<InputDevice>();
+    List<InputDevice> deviceList_HMD;
     
-    void Fetch_HMD()
+    bool fetching_hmd = false;
+
+    IEnumerator Fetch_HMD()
     {   
-        if( ! hasHMD )
+        fetching_hmd = true;
+
+        while( ! hasHMD )
+        {
+            if( deviceList_HMD == null ) deviceList_HMD = new List<InputDevice>();
 
             InputDevices.GetDevicesWithCharacteristics( DeviceType.HeadMounted, deviceList_HMD );
+
+            if( ! hasHMD ) Debug.LogWarning("Failed to fetch HMD, retying...");
+
+            yield return new WaitForSeconds( FetchRetryCooldown );
+        }
         
-        if( ! hasHMD ) Debug.LogWarning("Failed to fetch HMD");
+        yield return null;
+        
+        fetching_hmd = false;
     }
+
 
     void Scan_HMD()
     {
-        if( ! hasHMD ) 
-        { 
-            Fetch_HMD();
-            return;
-        }
+        if( ! hasHMD ) return;
         
         activeHMD.TryGetFeatureValue( CommonUsages.isTracked, out hmd_tracking );
         
@@ -208,10 +247,12 @@ public class XRInputs : MonoBehaviour
     public bool         leftController_secondaryButton;
     public Vector2      leftController_joystick;
     public bool         leftController_gripIsDown;
-    public float        leftController_gripValue;
     public bool         leftController_triggerIsDown;
-    public float        leftController_triggerValue;
+
+    [Range(0f,1f)]      public float leftController_triggerValue;
+    [Range(0f,1f)]      public float leftController_gripValue;
     
+    [HideInInspector] public bool         xr_leftController_readInput;
     [HideInInspector] public bool         xr_leftController_tracking;
     [HideInInspector] public Vector3      xr_leftController_position;
     [HideInInspector] public Quaternion   xr_leftController_rotation;
@@ -231,49 +272,61 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeLeftController => ! hasLeftController ? default : deviceList_LeftController[ 0 ];
     
-    [SerializeField] List<InputDevice> deviceList_LeftController = new List<InputDevice>();
+    [SerializeField] List<InputDevice> deviceList_LeftController;
     
-    void Fetch_LeftController()
+    bool fetching_leftController = false;
+
+    IEnumerator Fetch_LeftController()
     {   
-        if( ! hasLeftController )
+        fetching_leftController = true;
+
+        while( ! hasLeftController )
+        {
+            if( deviceList_LeftController == null ) deviceList_LeftController = new List<InputDevice>();
 
             InputDevices.GetDevicesWithCharacteristics( DeviceType.Left, deviceList_LeftController );
-        
-        if( ! hasLeftController ) Debug.LogWarning("Failed to fetch LeftController");
 
-        else OnFetchedLeft?.Invoke();
+            if( ! hasLeftController ) Debug.LogWarning("Failed to fetch LeftController, retying...");
+
+            yield return new WaitForSeconds( FetchRetryCooldown );
+        }
+
+        OnFetchedLeft?.Invoke();
+        
+        yield return null;
+        
+        fetching_leftController = false;
     }
 
     void Scan_LeftController()
     {
-        if( ! hasLeftController ) 
-        { 
-            Fetch_LeftController();
-            return;
-        }
+        if( ! hasLeftController ) return;
         
         activeLeftController.TryGetFeatureValue( CommonUsages.isTracked, out xr_leftController_tracking );
 
         if( xr_leftController_tracking )
         {
-            activeLeftController.TryGetFeatureValue( CommonUsages.devicePosition,       out xr_leftController_position );
-            activeLeftController.TryGetFeatureValue( CommonUsages.deviceRotation,       out xr_leftController_rotation );
+            bool b = false;
             
-            activeLeftController.TryGetFeatureValue( CommonUsages.secondaryButton,      out xr_leftController_secondaryButton );
-            activeLeftController.TryGetFeatureValue( CommonUsages.primaryButton,        out xr_leftController_primaryButton );
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.devicePosition,       out xr_leftController_position );
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.deviceRotation,       out xr_leftController_rotation );
+            
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.secondaryButton,      out xr_leftController_secondaryButton );
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.primaryButton,        out xr_leftController_primaryButton );
 
-            activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxis,        out xr_leftController_joystick );      
-            activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxisClick,   out xr_leftController_joystickClick ); 
-            activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxisTouch,   out xr_leftController_joystickTouch );
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxis,        out xr_leftController_joystick );      
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxisClick,   out xr_leftController_joystickClick ); 
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.primary2DAxisTouch,   out xr_leftController_joystickTouch );
         
-            activeLeftController.TryGetFeatureValue( CommonUsages.gripButton,           out xr_leftController_gripIsDown);
-            activeLeftController.TryGetFeatureValue( CommonUsages.grip,                 out xr_leftController_gripValue);
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.gripButton,           out xr_leftController_gripIsDown);
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.grip,                 out xr_leftController_gripValue);
 
-            activeLeftController.TryGetFeatureValue( CommonUsages.triggerButton,        out xr_leftController_triggerIsDown);
-            activeLeftController.TryGetFeatureValue( CommonUsages.trigger,              out xr_leftController_triggerValue);
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.triggerButton,        out xr_leftController_triggerIsDown);
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.trigger,              out xr_leftController_triggerValue);
             
-            activeLeftController.TryGetFeatureValue( CommonUsages.menuButton,           out menu_buttonDown);
+            b |= activeLeftController.TryGetFeatureValue( CommonUsages.menuButton,           out menu_buttonDown);
             
+            xr_leftController_readInput = b;
         }
     }
 
@@ -293,10 +346,12 @@ public class XRInputs : MonoBehaviour
     public bool         rightController_secondaryButton;
     public Vector2      rightController_joystick;
     public bool         rightController_gripIsDown;
-    public float        rightController_gripValue;
     public bool         rightController_triggerIsDown;
-    public float        rightController_triggerValue;
+
+    [Range(0f,1f)]      public float rightController_triggerValue;
+    [Range(0f,1f)]      public float rightController_gripValue;
     
+    [HideInInspector] public bool         xr_rightController_readInput;
     [HideInInspector] public bool         xr_rightController_tracking;
     [HideInInspector] public Vector3      xr_rightController_position;
     [HideInInspector] public Quaternion   xr_rightController_rotation;
@@ -316,26 +371,35 @@ public class XRInputs : MonoBehaviour
     
     public InputDevice activeRightController => ! hasRightController ? default : deviceList_RightController[ 0 ];
     
-    [SerializeField] List<InputDevice> deviceList_RightController = new List<InputDevice>();
+    List<InputDevice> deviceList_RightController;
     
-    void Fetch_RightController()
+    bool fetching_rightController = false;
+
+    IEnumerator Fetch_RightController()
     {   
-        if( ! hasRightController )
+        fetching_rightController = true;
+
+        while( ! hasRightController )
+        {
+            if( deviceList_RightController ==null ) deviceList_RightController = new List<InputDevice>();
 
             InputDevices.GetDevicesWithCharacteristics( DeviceType.Right, deviceList_RightController );
-        
-        if( ! hasRightController ) Debug.LogWarning("Failed to fetch RightController");
 
-        else OnFetchedRight?.Invoke();
+            if( ! hasRightController ) Debug.LogWarning("Failed to fetch RightController, retying...");
+
+            yield return new WaitForSeconds( FetchRetryCooldown );
+        }
+
+        OnFetchedRight?.Invoke();
+        
+        yield return null;
+        
+        fetching_rightController = false;
     }
 
     void Scan_RightController()
     {
-        if( ! hasRightController ) 
-        {
-            Fetch_RightController();
-            return;
-        }
+        if( ! hasRightController ) return;
 
         activeRightController.TryGetFeatureValue( CommonUsages.isTracked, out xr_rightController_tracking );
 
@@ -344,20 +408,24 @@ public class XRInputs : MonoBehaviour
             activeRightController.TryGetFeatureValue( CommonUsages.devicePosition,       out xr_rightController_position );
             activeRightController.TryGetFeatureValue( CommonUsages.deviceRotation,       out xr_rightController_rotation );
         
-            activeRightController.TryGetFeatureValue( CommonUsages.secondaryButton,      out xr_rightController_secondaryButton );
-            activeRightController.TryGetFeatureValue( CommonUsages.primaryButton,        out xr_rightController_primaryButton );
-
-            activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxis,        out xr_rightController_joystick );      
-            activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxisClick,   out xr_rightController_joystickClick ); 
-            activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxisTouch,   out xr_rightController_joystickTouch );
-        
-            activeRightController.TryGetFeatureValue( CommonUsages.gripButton,           out xr_rightController_gripIsDown);
-            activeRightController.TryGetFeatureValue( CommonUsages.grip,                 out xr_rightController_gripValue);
-
-            activeRightController.TryGetFeatureValue( CommonUsages.triggerButton,        out xr_rightController_triggerIsDown);
-            activeRightController.TryGetFeatureValue( CommonUsages.trigger,              out xr_rightController_triggerValue);
+            bool b = false;
             
-            activeRightController.TryGetFeatureValue( CommonUsages.menuButton,           out xr_menu_buttonDown);
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.secondaryButton,      out xr_rightController_secondaryButton );
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.primaryButton,        out xr_rightController_primaryButton );
+
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxis,        out xr_rightController_joystick );      
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxisClick,   out xr_rightController_joystickClick ); 
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.primary2DAxisTouch,   out xr_rightController_joystickTouch );
+        
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.gripButton,           out xr_rightController_gripIsDown);
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.grip,                 out xr_rightController_gripValue);
+
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.triggerButton,        out xr_rightController_triggerIsDown);
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.trigger,              out xr_rightController_triggerValue);
+            
+            b |= activeRightController.TryGetFeatureValue( CommonUsages.menuButton,           out xr_menu_buttonDown);
+
+            xr_rightController_readInput = b;
         }
     }
 
