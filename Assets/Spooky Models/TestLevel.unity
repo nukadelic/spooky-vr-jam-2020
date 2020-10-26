@@ -2945,9 +2945,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 93347930}
-  - component: {fileID: 93347932}
   - component: {fileID: 93347931}
-  - component: {fileID: 93347933}
+  - component: {fileID: 93347932}
   m_Layer: 0
   m_Name: view point trigger
   m_TagString: Untagged
@@ -2982,21 +2981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisViewpoint: {fileID: 1631329509}
---- !u!136 &93347932
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93347929}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.9523189
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.19436748, z: 0}
---- !u!65 &93347933
+--- !u!65 &93347932
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3007,8 +2992,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.18033378, z: 1}
-  m_Center: {x: 0, y: -0.6883547, z: 0}
+  m_Size: {x: 1, y: 1.9655961, z: 1}
+  m_Center: {x: 0, y: 0.19583572, z: 0}
 --- !u!1 &93896545
 GameObject:
   m_ObjectHideFlags: 0

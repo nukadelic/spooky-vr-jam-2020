@@ -27,6 +27,7 @@ public class Grappler : MonoBehaviour
             lr.SetPosition(0, grappleBody.position);
             lr.SetPosition(1, anchor.position);
         }
+        aimIndicator.rotation = deviceBridge.rightController_rotation;
     }
     public bool isGrappling = false;
     public void RunGrapple()
