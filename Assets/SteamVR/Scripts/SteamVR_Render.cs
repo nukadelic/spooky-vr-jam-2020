@@ -236,6 +236,10 @@ namespace Valve.VR
 
         private void OnInputFocus(bool hasFocus)
         {
+            Debug.Log("OnInputFocus :: " + hasFocus );
+
+            if( ! hasFocus ) return;
+
             if (SteamVR.active == false)
                 return;
 
