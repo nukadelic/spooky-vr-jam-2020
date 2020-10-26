@@ -12,7 +12,7 @@ public class CameraCollisionFollow : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (useCameraCollisions)
+        if (useCameraCollisions && !myController.usingViewPoint)
         {
             int layerMask = 1 << 8;
             RaycastHit hit;
