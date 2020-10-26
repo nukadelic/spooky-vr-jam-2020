@@ -2,8 +2,9 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using System.Collections;
 
-class SpaceButton : MonoBehaviour
+public class SpaceButton : MonoBehaviour
 {
     public bool autoRotate = true;
 
@@ -18,16 +19,25 @@ class SpaceButton : MonoBehaviour
     public Color idl;
     public Color active;
 
-    string text;
+    string text = "Text Not Set";
 
     public event System.Action<SpaceButton> OnClick;
 
     public UnityEvent ClickEvent;
 
+    public void SetText( string txt )
+    {
+        text = txt;
+        label.text = txt;
+    }
+
+    private void OnEnable( )
+    {
+        invokeLock = false;
+    }
+
     void Start( )
     {
-        text = label.text;
-
         rot_animation = new Vector3
         (
             Random.Range( 1f, 10f ),
@@ -50,6 +60,20 @@ class SpaceButton : MonoBehaviour
     
     Hand activeHand = Hand.None;
     
+    bool invokeLock = false;
+
+    IEnumerator Invoke()
+    {
+        invokeLock = true;
+
+        OnClick?.Invoke( this );
+        ClickEvent.Invoke();
+
+        yield return new WaitForSeconds( 1f );
+
+        invokeLock = false;
+    }
+
     void Update( )
     {
         if( activeHand != Hand.None )
@@ -57,10 +81,9 @@ class SpaceButton : MonoBehaviour
             bool left_down = activeHand == Hand.Left && XRInputs.instance.leftController_gripIsDown;
             bool right_down = activeHand == Hand.Right && XRInputs.instance.rightController_gripIsDown;
 
-            if( left_down || right_down )
+            if( ( left_down || right_down ) && ! invokeLock )
             {
-                OnClick?.Invoke( this );
-                ClickEvent.Invoke();
+                StartCoroutine( Invoke() ); 
                 return;
             }
         }
