@@ -9,7 +9,7 @@ public class HandScript : MonoBehaviour
 
     public bool IsLeftHand = true;
 
-    void Start()
+    void Awake()
     {
         if( IsLeftHand ) Left = this;
         else Right = this;

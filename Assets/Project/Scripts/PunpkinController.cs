@@ -4,6 +4,61 @@ using UnityEngine;
 using Unity.Mathematics;
 public class PunpkinController : MonoBehaviour
 {
+    public static PunpkinController Instance;
+
+    Vector3 starting_point;
+
+    void Awake( )
+    {
+        if(Instance != null)
+        {
+            Destroy( gameObject );
+            return;
+        }
+        else
+        {
+            DontDestroyOnLoad( gameObject );
+            Instance = this;
+        }
+
+        starting_point = transform.position;
+    }
+
+    private void Start( )
+    {
+        StartCoroutine( DelayCapture() );
+    }
+
+    Dictionary<Rigidbody,Vector3> positions;
+    IEnumerator DelayCapture()
+    {
+        yield return null;
+        
+        positions = new Dictionary<Rigidbody, Vector3>();
+        
+        foreach( var rb in FindObjectsOfType<Rigidbody>() )
+            positions.Add( rb, rb.gameObject.transform.position );
+    }
+
+    public void ResetVariables()
+    {
+        foreach( var rb in positions )
+        {
+            rb.Key.isKinematic = true;
+            rb.Key.gameObject.transform.position = rb.Value;
+            rb.Key.velocity = Vector3.zero;
+            rb.Key.angularVelocity = Vector3.zero;
+            rb.Key.isKinematic = false;
+        }
+        
+        foreach( var candy in FindObjectsOfType<EyeCandy>( true ) )
+        {
+            candy.gameObject.SetActive( true );
+        }
+
+        candyPoints = 0;
+    }
+
     public CandyKenesis myCandyHoard;
     public XRInputs deviceBridge;
     public Transform cameraOffsetTransform;
@@ -16,11 +71,8 @@ public class PunpkinController : MonoBehaviour
     public Grappler grappler;
     private Vector3 force;
 
-
     protected virtual void OnEnable()
     {
-        DontDestroyOnLoad( gameObject );
-
         Application.onBeforeRender += OnBeforeRender;
     }
 

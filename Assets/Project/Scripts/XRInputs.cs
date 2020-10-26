@@ -58,7 +58,7 @@ public class XRInputs : MonoBehaviour
     void UpdateUnifiedInputs()
     {
         bool steamVR_isValid = VRInputs.instance && VRInputs.instance.steamVR_captured;
-
+        
         #region Left
 
         if( xr_leftController_readInput )
@@ -148,6 +148,12 @@ public class XRInputs : MonoBehaviour
         }
 
         #endregion
+
+        #region Fire Events
+
+        if( leftController_primaryButton || rightController_primaryButton ) OnPrimaryButton?.Invoke();
+
+        #endregion
     }
 
     #endregion
@@ -172,6 +178,8 @@ public class XRInputs : MonoBehaviour
     #endregion
 
     #region Common values
+
+    public event System.Action OnPrimaryButton;
 
     [Header("Common Vars")]
 

@@ -11,7 +11,12 @@ public class VRInputs : MonoBehaviour
 
     private void Start( )
     {
-        if( instance != null ) throw new System.Exception("Duplicate");
+        if( instance != null )
+        {
+            Destroy( gameObject );
+
+            return;
+        }
 
         instance = this;
 
