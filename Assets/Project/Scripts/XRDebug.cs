@@ -126,6 +126,17 @@ public class XRDebug : MonoBehaviour
             textLeft.text += ( item_status,":V:", item.GetShortName() , ":\t", item.GetAxis( SteamVR_Input_Sources.LeftHand ) ) + "\n";
             textRight.text += ( item_status,":V:", item.GetShortName() , ":\t", item.GetAxis( SteamVR_Input_Sources.RightHand ) ) + "\n";
         }
+        
+        textLeft.text += ("-- SteamVR :: Properties -- ") + "\n";
+        textRight.text += ("-- SteamVR :: Properties -- ") + "\n";
+        
+        textLeft.text += "axis=" + VRInputs.instance.leftAxis + ", grip=" + VRInputs.instance.leftGrip +
+            ", trigger=" + VRInputs.instance.leftTrigger + ", btn1=" + VRInputs.instance.leftPrimaryButtonDown
+            + ", btn2=" + VRInputs.instance.leftSecondaryButtonDown;
+
+        textRight.text += "axis=" + VRInputs.instance.rightAxis + ", grip=" + VRInputs.instance.rightGrip +
+            ", trigger=" + VRInputs.instance.rightTrigger + ", btn1=" + VRInputs.instance.rightPrimaryButtonDown
+            + ", btn2=" + VRInputs.instance.rightSecondaryButtonDown;
 
         textLeft.text += ("-- SteamVR :: END -- ") + "\n";
         textRight.text += ("-- SteamVR :: END -- ") + "\n";

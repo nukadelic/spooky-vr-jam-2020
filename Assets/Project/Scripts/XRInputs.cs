@@ -252,7 +252,8 @@ public class XRInputs : MonoBehaviour
     [Range(0f,1f)]      public float leftController_triggerValue;
     [Range(0f,1f)]      public float leftController_gripValue;
     
-    [HideInInspector] public bool         xr_leftController_readInput;
+    bool         xr_leftController_readInput = false;
+    
     [HideInInspector] public bool         xr_leftController_tracking;
     [HideInInspector] public Vector3      xr_leftController_position;
     [HideInInspector] public Quaternion   xr_leftController_rotation;
@@ -306,11 +307,11 @@ public class XRInputs : MonoBehaviour
 
         if( xr_leftController_tracking )
         {
+            activeLeftController.TryGetFeatureValue( CommonUsages.devicePosition,       out xr_leftController_position );
+            activeLeftController.TryGetFeatureValue( CommonUsages.deviceRotation,       out xr_leftController_rotation );
+            
             bool b = false;
-            
-            b |= activeLeftController.TryGetFeatureValue( CommonUsages.devicePosition,       out xr_leftController_position );
-            b |= activeLeftController.TryGetFeatureValue( CommonUsages.deviceRotation,       out xr_leftController_rotation );
-            
+
             b |= activeLeftController.TryGetFeatureValue( CommonUsages.secondaryButton,      out xr_leftController_secondaryButton );
             b |= activeLeftController.TryGetFeatureValue( CommonUsages.primaryButton,        out xr_leftController_primaryButton );
 
@@ -351,7 +352,8 @@ public class XRInputs : MonoBehaviour
     [Range(0f,1f)]      public float rightController_triggerValue;
     [Range(0f,1f)]      public float rightController_gripValue;
     
-    [HideInInspector] public bool         xr_rightController_readInput;
+    bool         xr_rightController_readInput = false;
+    
     [HideInInspector] public bool         xr_rightController_tracking;
     [HideInInspector] public Vector3      xr_rightController_position;
     [HideInInspector] public Quaternion   xr_rightController_rotation;
