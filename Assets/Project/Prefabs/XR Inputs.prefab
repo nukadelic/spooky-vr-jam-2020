@@ -47,33 +47,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad1e63b5b08d5241b738d13d77747ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 6870660700030670767}
   menu_buttonDown: 0
+  xr_menu_buttonDown: 0
   hmd_tracking: 0
   hmd_position: {x: 0, y: 0, z: 0}
   hmd_rotation: {x: 0, y: 0, z: 0, w: 0}
+  leftController_joystickClick: 0
+  leftController_joystickTouch: 0
   leftController_tracking: 0
   leftController_position: {x: 0, y: 0, z: 0}
   leftController_rotation: {x: 0, y: 0, z: 0, w: 0}
   leftController_primaryButton: 0
+  leftController_secondaryButton: 0
   leftController_joystick: {x: 0, y: 0}
-  leftController_joystickClick: 0
-  leftController_joystickTouch: 0
   leftController_gripIsDown: 0
   leftController_gripValue: 0
   leftController_triggerIsDown: 0
   leftController_triggerValue: 0
+  xr_leftController_tracking: 0
+  xr_leftController_position: {x: 0, y: 0, z: 0}
+  xr_leftController_rotation: {x: 0, y: 0, z: 0, w: 0}
+  xr_leftController_primaryButton: 0
+  xr_leftController_secondaryButton: 0
+  xr_leftController_joystick: {x: 0, y: 0}
+  xr_leftController_joystickClick: 0
+  xr_leftController_joystickTouch: 0
+  xr_leftController_gripIsDown: 0
+  xr_leftController_gripValue: 0
+  xr_leftController_triggerIsDown: 0
+  xr_leftController_triggerValue: 0
+  rightController_joystickClick: 0
+  rightController_joystickTouch: 0
   rightController_tracking: 0
   rightController_position: {x: 0, y: 0, z: 0}
   rightController_rotation: {x: 0, y: 0, z: 0, w: 0}
   rightController_primaryButton: 0
+  rightController_secondaryButton: 0
   rightController_joystick: {x: 0, y: 0}
-  rightController_joystickClick: 0
-  rightController_joystickTouch: 0
   rightController_gripIsDown: 0
   rightController_gripValue: 0
   rightController_triggerIsDown: 0
   rightController_triggerValue: 0
+  xr_rightController_tracking: 0
+  xr_rightController_position: {x: 0, y: 0, z: 0}
+  xr_rightController_rotation: {x: 0, y: 0, z: 0, w: 0}
+  xr_rightController_primaryButton: 0
+  xr_rightController_secondaryButton: 0
+  xr_rightController_joystick: {x: 0, y: 0}
+  xr_rightController_joystickClick: 0
+  xr_rightController_joystickTouch: 0
+  xr_rightController_gripIsDown: 0
+  xr_rightController_gripValue: 0
+  xr_rightController_triggerIsDown: 0
+  xr_rightController_triggerValue: 0
 --- !u!1 &6870660699678115095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6870660700193089653
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,11 +2673,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92303bc3293aa8d469b3a6003dd1b2ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusText: {fileID: 6870660699890953411}
-  leftText: {fileID: 6870660701330618120}
-  rightText: {fileID: 6870660701448023946}
   controllerMapping:
     actionSetPath: /actions/VRInputs
+  joystick:
+    actionPath: /actions/VRInputs/in/joystick_position
+    needsReinit: 0
+  trigger:
+    actionPath: /actions/VRInputs/in/trigger_pull
+    needsReinit: 0
+  grip:
+    actionPath: /actions/VRInputs/in/grip_pull
+    needsReinit: 0
+  primary_button:
+    actionPath: /actions/VRInputs/in/primary_button
+    needsReinit: 0
+  secondary_button:
+    actionPath: /actions/VRInputs/in/secondary_button
+    needsReinit: 0
   listActionTrigger:
   - actionPath: /actions/default/in/InteractUI
     needsReinit: 0
@@ -2681,6 +2719,7 @@ MonoBehaviour:
   listActionVector2:
   - actionPath: /actions/VRInputs/in/joystick_position
     needsReinit: 0
+  steamVR_captured: 0
 --- !u!1 &6870660701261566052
 GameObject:
   m_ObjectHideFlags: 0
