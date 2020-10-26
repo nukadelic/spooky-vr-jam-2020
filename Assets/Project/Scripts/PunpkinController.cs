@@ -124,4 +124,11 @@ public class PunpkinController : MonoBehaviour
 
 
     }
+    public int candyPoints = 0;
+    public void AddCandyPoint()
+    {
+        candyPoints++;
+
+        // candy gain animation here
+    }
 }
