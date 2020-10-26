@@ -13,6 +13,7 @@ public class Grappler : MonoBehaviour
     public Transform anchor;
     public PunpkinController myController;
     private SoftJointLimit limit = new SoftJointLimit();
+    public Transform bodyAnchor;
     public void Start()
     {
         limit.limit = 10f;
@@ -25,7 +26,7 @@ public class Grappler : MonoBehaviour
     {
         if (isGrappling)
         {
-            lr.SetPosition(0, grappleBody.position);
+            lr.SetPosition(0, bodyAnchor.position);
             lr.SetPosition(1, anchor.position);
         }
         aimIndicator.rotation =Quaternion.Euler(0f, myController.currentRotation, 0f)  *deviceBridge.rightController_rotation;
