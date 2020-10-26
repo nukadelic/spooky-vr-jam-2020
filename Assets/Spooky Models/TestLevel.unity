@@ -4740,7 +4740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6472458194132405184, guid: 600702d125fb0514daaa22bb0ab20297, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8335399401894920000, guid: 600702d125fb0514daaa22bb0ab20297, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25986,6 +25986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SewerRing
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c36dba059994d0e4c8d979af1d0e0b30, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36dba059994d0e4c8d979af1d0e0b30, type: 3}
 --- !u!1 &774946695
@@ -29790,6 +29794,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1055690248572621548, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2665239345194533251, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -29834,6 +29842,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8521026993717217356, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1893222652}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
 --- !u!1 &874978137
