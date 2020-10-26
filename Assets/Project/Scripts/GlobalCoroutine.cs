@@ -17,6 +17,6 @@ public class GlobalCoroutine : MonoBehaviour
 
         DontDestroyOnLoad( gameObject );
 
-        GetComponent<AudioSource>().Play();
+        //GetComponent<AudioSource>().Play();
     }
 }

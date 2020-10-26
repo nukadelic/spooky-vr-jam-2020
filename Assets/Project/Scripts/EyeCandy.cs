@@ -5,6 +5,12 @@ using UnityEngine;
 public class EyeCandy : MonoBehaviour
 {
 
+    private void Start( )
+    {
+        var c = GetComponent<MeshRenderer>().material.GetColor("_BaseColor");
+        GetComponentInChildren<MeshRenderer>().material.SetColor( "color_hdr" , c );
+    }
+
 
     public void OnCollisionEnter(Collision collision)
     {
