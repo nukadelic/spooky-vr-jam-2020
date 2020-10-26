@@ -294,7 +294,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64f054f5a18f4584faa058fc83e53cc8, type: 2}
+  - {fileID: 2100000, guid: 4ba79faed91120b49abc90250c68aef6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4741,6 +4741,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5565639651242571426}
     m_Modifications:
+    - target: {fileID: 4486731702250984551, guid: 60f6a1f5755ffdb448cf5e0baff872fa, type: 3}
+      propertyPath: m_text
+      value: 'Rescue the candies!
+
+
+        Escape the Sewer!
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 6896290408608442699, guid: 60f6a1f5755ffdb448cf5e0baff872fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
