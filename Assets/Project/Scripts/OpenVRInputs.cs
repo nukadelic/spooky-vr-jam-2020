@@ -38,7 +38,7 @@ namespace API.Input
                 Destroy(gameObject);
                 return;
 		    }
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             singleton = this;
 
             devices = new List<InputDevice>();

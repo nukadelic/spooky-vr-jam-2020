@@ -1,43 +1,114 @@
 ﻿
 using UnityEngine;
-using UnityEngine.SpatialTracking;
+using TMPro;
+using UnityEngine.Events;
 
 class SpaceButton : MonoBehaviour
 {
-    Vector3 deltaRot;
+    public bool autoRotate = true;
+
+    public TextMeshPro label;
+    public GameObject display;
+    public GameObject glow;
+    
+    Material displayMat;
+
+    Vector3 rot_animation;
+
+    public Color idl;
+    public Color active;
+
+    string text;
+
+    public event System.Action<SpaceButton> OnClick;
+
+    public UnityEvent ClickEvent;
 
     void Start( )
     {
-        deltaRot = new Vector3(
+        text = label.text;
+
+        rot_animation = new Vector3
+        (
             Random.Range( 1f, 10f ),
             Random.Range( 1f, 10f ),
             Random.Range( 1f, 10f )
         );
+
+        displayMat = display.GetComponent<MeshRenderer>().material;
     }
 
+    private void OnDrawGizmosSelected( )
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere( transform.position, Radius * transform.lossyScale.magnitude );
+    }
+
+    public float Radius = 1f;
+
+    enum Hand { None = -1, Left = 0, Right = 1 }
+    
+    Hand activeHand = Hand.None;
+    
     void Update( )
     {
-        transform.Rotate( deltaRot * Time.deltaTime, Space.Self );        
-    }
-
-    private void OnTriggerEnter( Collider other )
-    {
-        var driver = other.GetComponent<TrackedPoseDriver>();
-
-        if( driver == null ) return;
-
-        //if( other.GetComponent<TrackedPoseDriver> )
-
-        if( other.tag == "Hand" )
+        if( activeHand != Hand.None )
         {
+            bool left_down = activeHand == Hand.Left && XRInputs.instance.leftController_gripIsDown;
+            bool right_down = activeHand == Hand.Right && XRInputs.instance.rightController_gripIsDown;
 
+            if( left_down || right_down )
+            {
+                OnClick?.Invoke( this );
+                ClickEvent.Invoke();
+                return;
+            }
+        }
+
+        var R = Radius * transform.lossyScale.magnitude;
+
+        var distL = HandScript.Left.transform.position - transform.position;
+        var distR = HandScript.Right.transform.position - transform.position;
+
+        if( activeHand == Hand.None )
+        {
+            if( distL.magnitude < R ) 
+            {
+                // left entered the area 
+                activeHand = Hand.Left;
+                glow.SetActive( true );
+                label.text = "Grip to select";
+            }
+            if( distR.magnitude < R )
+            {
+                // right entererd the area 
+                activeHand = Hand.Right;
+                glow.SetActive( true );
+                label.text = "Grip to select";
+            }
+        }
+        else
+        {
+            var dist = ( activeHand == Hand.Left ? distL : distR ).magnitude;
+
+            var t = ( 1f - ( dist / R ) ) * 0.6f + 0.4f;
+            var c = Color.Lerp( idl, active, t );
+
+            displayMat.SetColor("_EmissionColor", c );
+
+            if( dist > R )
+            {
+                activeHand = Hand.None;
+                glow.SetActive( false );
+                label.text = text;
+            }
+        }
+        
+        if( autoRotate )
+        {
+            display.transform.Rotate( rot_animation * Time.deltaTime, Space.Self );        
         }
     }
 
-    private void OnTriggerExit( Collider other )
-    {
-        var driver = other.GetComponent<TrackedPoseDriver>();
 
-        if( driver == null ) return;
-    }
 }

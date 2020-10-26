@@ -19,6 +19,7 @@ public class PunpkinController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+        DontDestroyOnLoad( gameObject );
 
         Application.onBeforeRender += OnBeforeRender;
     }
