@@ -31,8 +31,15 @@ public class PunpkinController : MonoBehaviour
     }
 
     public bool canDoubleJump = false;
-    public bool jumped = false;
-    public bool doubleJumped = false;
+    private bool jumped = false;
+    private bool doubleJumped = false;
+    public bool snapTurning;
+    private bool canSnap = true;
+    IEnumerator SnapDelayCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canSnap = true;
+    }
     public void Update()
     {
         if (usingViewPoint)
@@ -43,9 +50,15 @@ public class PunpkinController : MonoBehaviour
             currentRotation = dirToPump.y;
 
         }
-        else if (Mathf.Abs(deviceBridge.rightController_joystick.x) > 0.2f)
+        else if (Mathf.Abs(deviceBridge.rightController_joystick.x) > 0.2f && !snapTurning)
             currentRotation += deviceBridge.rightController_joystick.x * 3f;
-
+        else if (deviceBridge.rightController_joystick.magnitude > 0.7f && snapTurning && canSnap)
+        {
+            currentRotation -= Mathf.Atan2(deviceBridge.rightController_joystick.y, deviceBridge.rightController_joystick.x) * Mathf.Rad2Deg - 90f;
+          //  Debug.Log(Mathf.Atan2(deviceBridge.rightController_joystick.y, deviceBridge.rightController_joystick.x) * Mathf.Rad2Deg);
+            canSnap = false;
+            StartCoroutine(SnapDelayCoroutine());
+        }
         force = Vector3.zero;
 
         force.x = deviceBridge.leftController_joystick.x;

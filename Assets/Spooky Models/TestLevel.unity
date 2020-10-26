@@ -29670,6 +29670,10 @@ PrefabInstance:
       propertyPath: viewPoint
       value: 
       objectReference: {fileID: 1631329509}
+    - target: {fileID: 977371595146195045, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
+      propertyPath: snapTurning
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 977371595146195046, guid: f0561a54547001542ac3ff7b49783f70, type: 3}
       propertyPath: m_Name
       value: pumpkin
