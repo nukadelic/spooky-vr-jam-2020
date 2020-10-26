@@ -11,6 +11,7 @@ public class Grappler : MonoBehaviour
     public XRInputs deviceBridge;
     public LineRenderer lr;
     public Transform anchor;
+    public PunpkinController myController;
     private SoftJointLimit limit = new SoftJointLimit();
     public void Start()
     {
@@ -27,7 +28,7 @@ public class Grappler : MonoBehaviour
             lr.SetPosition(0, grappleBody.position);
             lr.SetPosition(1, anchor.position);
         }
-        aimIndicator.rotation = deviceBridge.rightController_rotation;
+        aimIndicator.rotation =Quaternion.Euler(0f, myController.currentRotation, 0f)  *deviceBridge.rightController_rotation;
     }
     public bool isGrappling = false;
     public void RunGrapple()

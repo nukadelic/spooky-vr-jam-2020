@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8415802000364058080
 Transform:
   m_ObjectHideFlags: 0
@@ -1454,6 +1454,7 @@ MonoBehaviour:
   bodyTransform: {fileID: 728152900556081309}
   viewPoint: {fileID: 0}
   cameraOffset: {x: 0, y: 2, z: -4}
+  currentRotation: 0
   groundDetection: {fileID: 7226831485728595158}
   grappler: {fileID: 4769744161623284889}
   canDoubleJump: 0
@@ -3533,6 +3534,7 @@ MonoBehaviour:
   deviceBridge: {fileID: 3206661111888058855}
   lr: {fileID: 7343774707284558009}
   anchor: {fileID: 4231066875748628785}
+  myController: {fileID: 977371595146195045}
   isGrappling: 0
 --- !u!114 &8288281177332386845
 MonoBehaviour:
