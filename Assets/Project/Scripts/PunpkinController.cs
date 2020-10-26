@@ -66,7 +66,7 @@ public class PunpkinController : MonoBehaviour
     public Transform bodyTransform;
     public Transform viewPoint;
     public Vector3 cameraOffset = new Vector3(0f, 2f, -4f);
-    private float currentRotation;
+    public float currentRotation;
     public JumpDetect groundDetection;
     public Grappler grappler;
     private Vector3 force;
