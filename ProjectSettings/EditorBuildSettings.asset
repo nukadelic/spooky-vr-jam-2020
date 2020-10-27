@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Spooky Models/TestLevel.unity
     guid: 1d6f1662c5e729f40aa11352d35ec049
+  - enabled: 1
+    path: Assets/Spooky Models/TestLevel - Copy.unity
+    guid: e732a6721600da34d93796c7b895125f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0fd33536d1b73dc408007ad48c826e5f, type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 506262cc38a238048af441a6b5f54693, type: 2}
